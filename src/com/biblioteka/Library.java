@@ -69,7 +69,7 @@ public class Library
             }
             for(int i:wypozyczoneKsiazki)
             {
-                osoba.WypozyczKsiazke(i,ksiazki.get(i));
+                osoba.WypozyczKsiazkeLoadPerson(i,ksiazki.get(i));
             }
         }
 
@@ -118,6 +118,7 @@ public class Library
         BufferedWriter writer = new BufferedWriter(new FileWriter(PEOPLE_PATH));
         for(Person osoba: osoby)
         {
+
             writer.write(osoba.saveWiersz());
         }
         writer.close();

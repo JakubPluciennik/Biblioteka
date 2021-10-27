@@ -31,6 +31,21 @@ public class Person {
         }
       return false;
     }
+
+    //podczas ładowania z pliku nie zmnejszać liczby dostępnych książek
+    public Boolean WypozyczKsiazkeLoadPerson(int index, Book ksiazka)
+    {
+        if (ksiazka.getDostępne() > 0)
+        {
+            if (!wypozyczoneKsiazki.containsKey(index))
+            {
+                wypozyczoneKsiazki.put(index, ksiazka);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Boolean OddajKsiazke(int index, Book ksiazka)
     {
         if(wypozyczoneKsiazki.containsValue(ksiazka))

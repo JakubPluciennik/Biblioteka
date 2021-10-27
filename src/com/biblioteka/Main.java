@@ -14,7 +14,7 @@ public class Main {
     {
         for(Person osoba:library.osoby)
         {
-            if(login.toLowerCase().equals(osoba.login.toLowerCase())&&(haslo.equals(osoba.hasło) || osoba.hasło.equals(" ")))
+            if(login.equalsIgnoreCase(osoba.login)&&(haslo.equals(osoba.hasło) || osoba.hasło.equals(" ")))
             {
                 zalogowana = osoba;
                 return true;
@@ -29,11 +29,11 @@ public class Main {
             return true;
     }
 
-    static public Person TworzenieKonta(Scanner scanner)
+    static public Person TworzenieKonta()
     {
         System.out.println("--TWORZENIE KONTA--");
         System.out.print("Imię: ");
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String imie = scanner.nextLine();
 
         System.out.print("Nazwisko: ");
@@ -80,7 +80,12 @@ public class Main {
 //koniec komunikatu początkowego
 
             Scanner scanner = new Scanner(System.in);
-            menu = scanner.nextInt();
+            try {
+                menu = Integer.parseInt(scanner.nextLine());
+            } catch(NumberFormatException ex) {
+                System.out.println("Podano niepoprawną wartość, spróbuj ponownie.");
+                menu = -1;
+            }
 
 //Switch dla pozycji menu
             if(zalogowana == null)  //niezalogowany
@@ -101,7 +106,7 @@ public class Main {
 
                         break;
                     case 2: //Tworzenie konta i logowanie
-                        Person konto = TworzenieKonta(scanner);
+                        Person konto = TworzenieKonta();
                         biblioteka.DodajOsobe(konto);
                         if(Logowanie(konto.login,konto.hasło,biblioteka)) System.out.println("Udane logowanie");
                         else System.out.println("Nieudana próba logowania\n");
@@ -114,7 +119,7 @@ public class Main {
             }
             else    //zalogowany
             {
-                int index = 0;
+                int index;
                 Book ksiazka;
                 switch(menu)
                 {
@@ -139,7 +144,7 @@ public class Main {
                         ksiazka = biblioteka.ksiazki.get(index);
                         if(zalogowana.WypozyczKsiazke(index,ksiazka))
                         {
-                            System.out.println("Wypożyczono książkę: "+ ksiazka.toString());
+                            System.out.println("Wypożyczono książkę: "+ ksiazka);
                         }
                         else System.out.println("Nie udało się wypożyczyć książki");
                         break;
