@@ -19,7 +19,7 @@ public class Library
       ksiazki = new Vector<Book>();
     }
 
-    public void WypiszDostepne()
+    public void wypiszDostepne()
     {
         for (Book ksiazka:ksiazki)
         {
@@ -29,7 +29,7 @@ public class Library
             }
         }
     }
-    public Boolean DodajOsobe(Person osoba)
+    public Boolean dodajOsobe(Person osoba)
     {
         if(!osoby.contains(osoba)) return osoby.add(osoba);
         return false;
@@ -39,7 +39,7 @@ public class Library
         if(!ksiazki.contains(ksiazka)) return ksiazki.add(ksiazka);
         return false;
     }
-    private Book LoadWierszKsiazka(String linia)
+    private Book loadWierszKsiazka(String linia)
     {
         String[] dane = linia.split("\\|");
         //linia: tytul|autor|rok|dostepnych
@@ -50,7 +50,7 @@ public class Library
         return ksiazka;
     }
 
-    private Person LoadWierszOsoba(String linia)
+    private Person loadWierszOsoba(String linia)
     {
         String[] dane = linia.split("\\|");
         //linia: imie|nazwisko|login|haslo|wypozyczoneKsiazki
@@ -69,7 +69,7 @@ public class Library
             }
             for(int i:wypozyczoneKsiazki)
             {
-                osoba.WypozyczKsiazkeLoadPerson(i,ksiazki.get(i));
+                osoba.wypozyczKsiazkeLoadPerson(i,ksiazki.get(i));
             }
         }
 
@@ -81,7 +81,7 @@ public class Library
         File targetFile = new File(path);
         targetFile.delete();
     }
-    private void SaveBooks() throws IOException
+    private void saveBooks() throws IOException
     {
         cleanUpFiles(BOOKS_PATH);
         Path newFilePath = Paths.get(BOOKS_PATH);
@@ -96,20 +96,20 @@ public class Library
         writer.close();
     }
 
-    private void LoadBooks () throws IOException
+    private void loadBooks() throws IOException
     {
         try(BufferedReader br = new BufferedReader(new FileReader(BOOKS_PATH)))
         {
             for (String linia; (linia = br.readLine()) != null; )
             {
                 //dodawane po kolei, więc nie potrzeba precyzować indeksu
-                ksiazki.add(LoadWierszKsiazka(linia));
+                ksiazki.add(loadWierszKsiazka(linia));
             }
         }
     }
 
 
-    private void SavePeople() throws IOException
+    private void savePeople() throws IOException
     {
         cleanUpFiles(PEOPLE_PATH);
         Path newFilePath = Paths.get(PEOPLE_PATH);
@@ -125,28 +125,28 @@ public class Library
     }
 
 
-    private void LoadPeople() throws IOException
+    private void loadPeople() throws IOException
     {
         try(BufferedReader br = new BufferedReader(new FileReader(PEOPLE_PATH)))
         {
             for (String linia; (linia = br.readLine()) != null; )
             {
-                osoby.add(LoadWierszOsoba(linia));
+                osoby.add(loadWierszOsoba(linia));
             }
         }
     }
 
-    void Save() throws IOException
+    void save() throws IOException
     {
-        SaveBooks();
-        SavePeople();
+        saveBooks();
+        savePeople();
         System.out.println("Zapisano dane");
     }
 
-    void Load() throws IOException
+    void load() throws IOException
     {
-        LoadBooks();
-        LoadPeople();
+        loadBooks();
+        loadPeople();
         System.out.println("Załadowano dane");
     }
 

@@ -9,7 +9,7 @@ public class Person {
     String hasło;
     Map<Integer,Book> wypozyczoneKsiazki;
 
-    public Person(String imię, String nazwisko, String login, String hasło)
+    Person(String imię, String nazwisko, String login, String hasło)
     {
         this.imię = imię;
         this.nazwisko = nazwisko;
@@ -18,7 +18,7 @@ public class Person {
         this.wypozyczoneKsiazki = new HashMap<Integer, Book>();
     }
 
-    public Boolean WypozyczKsiazke(int index, Book ksiazka)
+     Boolean wypozyczKsiazke(int index, Book ksiazka)
     {
         if(ksiazka.getDostępne()>0)
         {
@@ -33,20 +33,18 @@ public class Person {
     }
 
     //podczas ładowania z pliku nie zmnejszać liczby dostępnych książek
-    public Boolean WypozyczKsiazkeLoadPerson(int index, Book ksiazka)
+    void wypozyczKsiazkeLoadPerson(int index, Book ksiazka)
     {
         if (ksiazka.getDostępne() > 0)
         {
             if (!wypozyczoneKsiazki.containsKey(index))
             {
                 wypozyczoneKsiazki.put(index, ksiazka);
-                return true;
             }
         }
-        return false;
     }
 
-    public Boolean OddajKsiazke(int index, Book ksiazka)
+     Boolean oddajKsiazke(int index, Book ksiazka)
     {
         if(wypozyczoneKsiazki.containsValue(ksiazka))
         {
@@ -70,7 +68,7 @@ public class Person {
         }
         return wynik;
     }
-    public void Wypozyczone()
+     void wypozyczone()
     {
         for (int i = 0; i < wypozyczoneKsiazki.size(); i++)
         {
@@ -88,7 +86,7 @@ public class Person {
                 '}';
     }
 
-    public String saveWiersz()
+    String saveWiersz()
     {
         //Imię|Nazwisko|Login|Hasło|Lista wypożyczonych książek
         if(hasło.equals("")) hasło = " ";
