@@ -1,0 +1,58 @@
+[
+	{
+		"id":0,
+		"title":"Gra o Tron",
+		"author":"G.R.R.Martin",
+		"publication":2013,
+		"availability":44
+	},
+	{
+		"id":1,
+		"title":"Sto lat samotności",
+		"author":"G.G. Marquez",
+		"publication":2011,
+		"availability":30
+	},
+	{
+		"id":2,
+		"title":"Łuk triumfalny",
+		"author":"E.M.Remarque",
+		"publication":2001,
+		"availability":120
+	},
+	{
+		"id":3,
+		"title":"I nie było już nikogo",
+		"author":"Agatha Christie",
+		"publication":1939,
+		"availability":1
+	},
+	{
+		"id":4,
+		"title":"Cień Wiatru",
+		"author":"C.R.Zafon",
+		"publication":1945,
+		"availability":3
+	},
+	{
+		"id":5,
+		"title":"Rzeźnia numer pięć",
+		"author":"Kurt Vonegut",
+		"publication":1955,
+		"availability":1
+	},
+	{
+		"id":6,
+		"title":"Jądro Ciemności",
+		"author":"Joseph Conrad",
+		"publication":1960,
+		"availability":2
+	},
+	{
+		"id":7,
+		"title":"Siddhartha",
+		"author":"Herman Hesse",
+		"publication":1934,
+		"availability":0
+	}
+]

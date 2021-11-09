@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUI extends JFrame {
-    private final JPanel mainPanel = new JPanel(new CardLayout());
-    private final CardLayout cards;
+    private JPanel mainPanel = new JPanel(new CardLayout());
+    private CardLayout cards;
 
     JPanel oknoL;
     JPanel oknoR;
@@ -33,8 +33,8 @@ public class GUI extends JFrame {
         menuZ.update(zalogowanyUżytkownik);
         wyswietlW.update(this);
         oddajK.update(zalogowanyUżytkownik);
-        wypożyczK.update(this);
         wyswietlD.update(this);
+        wypożyczK.update(this);
     }
 
     public GUI(String title, Library biblioteka) {

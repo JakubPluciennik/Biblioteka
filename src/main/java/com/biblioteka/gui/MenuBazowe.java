@@ -1,5 +1,6 @@
 package com.biblioteka.gui;
 
+import com.biblioteka.JSONSerializer;
 import com.biblioteka.Library;
 import com.biblioteka.XMLConvertor;
 
@@ -14,7 +15,7 @@ interface Action {
 }
 
 public class MenuBazowe extends PanelBazowy {
-    private final Library biblioteka;
+    private Library biblioteka;
     protected JLabel loginStatusLabel;
     protected JList<String> lista;
 
@@ -63,6 +64,11 @@ public class MenuBazowe extends PanelBazowy {
             ex.printStackTrace();
         }
         XMLConvertor.naXML(biblioteka);
+        try {
+            JSONSerializer.serialize(biblioteka, "src/main/resources/JSON/Books.json", "src/main/resources/JSON/People.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //brutalne zamykanie
         System.exit(0);
@@ -75,7 +81,8 @@ public class MenuBazowe extends PanelBazowy {
 
         //JList<String> menuNiezalogowanyLista;
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        listModel.addAll(Arrays.stream(menuOpcje).toList());
+        //listModel.addAll(Arrays.stream(menuOpcje).toList());
+        listModel.addAll(Arrays.asList(menuOpcje));
 
         //stworzenie listy z tekstów w tablicy menuOpcje
         lista = new JList<>(listModel);

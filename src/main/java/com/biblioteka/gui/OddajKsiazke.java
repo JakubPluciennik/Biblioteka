@@ -7,7 +7,9 @@ import com.biblioteka.Person;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OddajKsiazke extends PanelBazowy {
 
@@ -29,7 +31,19 @@ public class OddajKsiazke extends PanelBazowy {
         tableModel.addColumn("Tytuł");
         tableModel.addColumn("Autor");
         tableModel.addColumn("Rok Wydania");
-        table = new JTable(tableModel);
+        table = new JTable(tableModel) {
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
+
+            // brudny hack który powoduje że przy zaznaczaniu wierszy w tabeli ostatni z nich nie znika
+            @Override
+            public int getSelectedRow() {
+                int row = super.getSelectedRow();
+                if (row == -1) return -2;
+                return row;
+            }
+        };
+
         table.setFont(new Font("Sans", Font.PLAIN, 14));
         table.setBorder(new LineBorder(Color.black));
         add(table);
@@ -67,8 +81,31 @@ public class OddajKsiazke extends PanelBazowy {
                 JOptionPane.showMessageDialog(null, "Niepoprawny napis!", "Błąd oddania", JOptionPane.ERROR_MESSAGE);
             }
         });
-
         add(Oddaj);
+
+        // przycisk do oddawania zaznaczonych wierszy w tabeli
+        JButton returnSelectedButton = new JButton("Oddaj zaznaczone");
+        returnSelectedButton.setBackground(new Color(0xB85C38));
+        returnSelectedButton.setForeground(Color.white);
+        returnSelectedButton.setBounds(gui.getWidth() - 50 - 200, 300, 200, 25);
+        returnSelectedButton.addActionListener(e -> {
+
+            int[] selectedRows = table.getSelectedRows();
+            TableModel model = table.getModel();
+
+            Person zalogowanyUżytkownik = gui.getZalogowanyUżytkownik();
+            var ksiazkiUzytkownika = zalogowanyUżytkownik.getWypozyczoneKsiazki();
+
+            for (int row : selectedRows) {
+                int id = (int)model.getValueAt(row, 0);
+                Book tmp = ksiazkiUzytkownika.get(id);
+                zalogowanyUżytkownik.oddajKsiazke(id, tmp);
+            }
+
+            gui.onUserStateChanged();
+            table.clearSelection();
+        });
+        add(returnSelectedButton);
 
         //przycisk powrotu
         JButton backButton = new JButton("Powrót");
@@ -90,16 +127,18 @@ public class OddajKsiazke extends PanelBazowy {
     public void update() {
         DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
         tableModel.setRowCount(0);
+
         if(zalogowanyUżytkownik != null) {
             var wypozyczoneKsiazki = zalogowanyUżytkownik.getWypozyczoneKsiazki();
 
             for (int i = 0; i < wypozyczoneKsiazki.size(); i++) {
-                Integer[] index = wypozyczoneKsiazki.keySet().toArray(new Integer[0]);
-                Book[] b = wypozyczoneKsiazki.values().toArray(new Book[0]);
+                Integer index[] = wypozyczoneKsiazki.keySet().toArray(new Integer[0]);
+                Book b[] = wypozyczoneKsiazki.values().toArray(new Book[0]);
                 tableModel.addRow(new Object[]{index[i], b[i].getTytuł(), b[i].getAutor(), b[i].getRokWydania()});
             }
 
             table.setBounds(20, 50, getWidth() - 60, wypozyczoneKsiazki.size() * 16);
+
         }
     }
 }

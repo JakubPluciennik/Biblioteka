@@ -11,6 +11,8 @@ public class Person {
 
     public Map<Integer, Book> getWypozyczoneKsiazki() { return wypozyczoneKsiazki; }
 
+    public String getName() { return imię; }
+    public String getSurname() { return nazwisko; }
     public String getLogin() { return login; }
     public String getHasło() { return hasło; }
 

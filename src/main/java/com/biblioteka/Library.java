@@ -15,9 +15,11 @@ public class Library {
     private static final String BOOKS_PATH = "src/main/resources/CSV/Books.csv";
     private static final String PEOPLE_PATH = "src/main/resources/CSV/People.csv";
 
-    public Iterable<Book> getKsiazki() { return ksiazki; }
-    public int size() { return ksiazki.size(); }
+    public Vector<Book> getKsiazki() { return ksiazki; }
+    public int bookCount() { return ksiazki.size(); }
+    public int userCount() { return osoby.size(); }
     public Book getKsiazka(int index) { return ksiazki.elementAt(index); }
+    public  Person getUser(int index) { return osoby.elementAt(index); }
 
     public Library() {
         osoby = new Vector<Person>();

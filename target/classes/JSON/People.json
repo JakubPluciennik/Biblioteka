@@ -1,0 +1,142 @@
+[
+	{
+		"name":"Jan",
+		"surname":"Kowalski",
+		"login":"login",
+		"password":"hasło",
+		"borrowed":[
+			{
+				"id":2,
+				"name":"Łuk triumfalny"
+			},
+			{
+				"id":4,
+				"name":"Cień Wiatru"
+			},
+		]
+	},
+	{
+		"name":"Jakub",
+		"surname":"Płuciennik",
+		"login":"jakubp",
+		"password":"aaaa",
+		"borrowed":[
+			{
+				"id":0,
+				"name":"Gra o Tron"
+			},
+			{
+				"id":3,
+				"name":"I nie było już nikogo"
+			},
+			{
+				"id":5,
+				"name":"Rzeźnia numer pięć"
+			},
+		]
+	},
+	{
+		"name":"Adam",
+		"surname":"Mickiewicz",
+		"login":"adamm",
+		"password":" ",
+		"borrowed":[
+			{
+				"id":0,
+				"name":"Gra o Tron"
+			},
+		]
+	},
+	{
+		"name":"Janek",
+		"surname":"Franek",
+		"login":"jf",
+		"password":"jf",
+		"borrowed":[
+			{
+				"id":3,
+				"name":"I nie było już nikogo"
+			},
+		]
+	},
+	{
+		"name":"Paweł",
+		"surname":"Nowak",
+		"login":"pawel",
+		"password":"pawel",
+		"borrowed":[
+			{
+				"id":1,
+				"name":"Sto lat samotności"
+			},
+		]
+	},
+	{
+		"name":"Andrzej",
+		"surname":"Duda",
+		"login":"aduda",
+		"password":"123",
+		"borrowed":[
+			{
+				"id":4,
+				"name":"Cień Wiatru"
+			},
+			{
+				"id":5,
+				"name":"Rzeźnia numer pięć"
+			},
+		]
+	},
+	{
+		"name":"Radosław",
+		"surname":"Poziomka",
+		"login":"poziom",
+		"password":"123",
+		"borrowed":[
+			{
+				"id":2,
+				"name":"Łuk triumfalny"
+			},
+		]
+	},
+	{
+		"name":"Piotr",
+		"surname":"Pawłowski",
+		"login":"pp",
+		"password":"pp",
+		"borrowed":[
+			{
+				"id":3,
+				"name":"I nie było już nikogo"
+			},
+			{
+				"id":6,
+				"name":"Jądro Ciemności"
+			},
+			{
+				"id":7,
+				"name":"Siddhartha"
+			},
+		]
+	}
+	{
+		"name":"Nowy",
+		"surname":"Użytkownik",
+		"login":"nu",
+		"password":"nu",
+		"borrowed":[
+			{
+				"id":1,
+				"name":"Sto lat samotności"
+			},
+			{
+				"id":3,
+				"name":"I nie było już nikogo"
+			},
+			{
+				"id":5,
+				"name":"Rzeźnia numer pięć"
+			},
+		]
+	}
+]

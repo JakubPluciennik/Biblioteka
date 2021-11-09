@@ -61,8 +61,8 @@ public class WyswietlWypozyczone extends PanelBazowy {
             //wpisywanie do tabeli książek wypożyczonych przez zalogowana
             var ksiazki = zalogowanyUżytkownik.getWypozyczoneKsiazki();
             for (int i = 0; i < ksiazki.size(); i++) {
-                Integer[] index = ksiazki.keySet().toArray(new Integer[0]);
-                Book[] b = ksiazki.values().toArray(new Book[0]);
+                Integer index[] = ksiazki.keySet().toArray(new Integer[0]);
+                Book b[] = ksiazki.values().toArray(new Book[0]);
                 tableModel.addRow(new Object[]{index[i], b[i].getTytuł(), b[i].getAutor(), b[i].getRokWydania(), b[i].getDostępne()});
             }
 
