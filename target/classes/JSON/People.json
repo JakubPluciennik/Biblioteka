@@ -12,7 +12,7 @@
 			{
 				"id":4,
 				"name":"Cień Wiatru"
-			},
+			}
 		]
 	},
 	{
@@ -32,7 +32,7 @@
 			{
 				"id":5,
 				"name":"Rzeźnia numer pięć"
-			},
+			}
 		]
 	},
 	{
@@ -44,7 +44,7 @@
 			{
 				"id":0,
 				"name":"Gra o Tron"
-			},
+			}
 		]
 	},
 	{
@@ -56,7 +56,7 @@
 			{
 				"id":3,
 				"name":"I nie było już nikogo"
-			},
+			}
 		]
 	},
 	{
@@ -68,7 +68,7 @@
 			{
 				"id":1,
 				"name":"Sto lat samotności"
-			},
+			}
 		]
 	},
 	{
@@ -84,7 +84,7 @@
 			{
 				"id":5,
 				"name":"Rzeźnia numer pięć"
-			},
+			}
 		]
 	},
 	{
@@ -96,7 +96,7 @@
 			{
 				"id":2,
 				"name":"Łuk triumfalny"
-			},
+			}
 		]
 	},
 	{
@@ -116,9 +116,9 @@
 			{
 				"id":7,
 				"name":"Siddhartha"
-			},
+			}
 		]
-	}
+	},
 	{
 		"name":"Nowy",
 		"surname":"Użytkownik",
@@ -136,7 +136,7 @@
 			{
 				"id":5,
 				"name":"Rzeźnia numer pięć"
-			},
+			}
 		]
 	}
 ]
