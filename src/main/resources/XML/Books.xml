@@ -16,7 +16,7 @@
         <title>Łuk triumfalny</title>
         <author>E.M.Remarque</author>
         <publication>2001</publication>
-        <availability>120</availability>
+        <availability>119</availability>
     </book>
     <book id="3">
         <title>I nie było już nikogo</title>
@@ -40,7 +40,7 @@
         <title>Jądro Ciemności</title>
         <author>Joseph Conrad</author>
         <publication>1960</publication>
-        <availability>2</availability>
+        <availability>1</availability>
     </book>
     <book id="7">
         <title>Siddhartha</title>

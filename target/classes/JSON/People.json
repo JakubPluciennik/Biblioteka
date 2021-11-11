@@ -26,12 +26,20 @@
 				"name":"Gra o Tron"
 			},
 			{
+				"id":2,
+				"name":"Łuk triumfalny"
+			},
+			{
 				"id":3,
 				"name":"I nie było już nikogo"
 			},
 			{
 				"id":5,
 				"name":"Rzeźnia numer pięć"
+			},
+			{
+				"id":6,
+				"name":"Jądro Ciemności"
 			}
 		]
 	},
