@@ -1,7 +1,9 @@
 package com.biblioteka;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.time.Year;
 import java.util.Scanner;
 
 public class Main {
@@ -160,7 +162,7 @@ public class Main {
 
         JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
 
-
         XMLConvertor.naXML(biblioteka);
+        DatabaseWriter.saveInDatabase(biblioteka);
     }
 }

@@ -1,8 +1,17 @@
 package com.biblioteka;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.Year;
 
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     String tytuł;
     String autor;
     Year rokWydania;
@@ -25,6 +34,7 @@ public class Book {
     public String getTytuł() { return tytuł; }
     public String getAutor() { return autor; }
     public Year getRokWydania() { return rokWydania; }
+    public long getId() { return id; }
 
     @Override
     public String toString() {
