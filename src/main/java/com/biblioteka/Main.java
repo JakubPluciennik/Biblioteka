@@ -2,6 +2,7 @@ package com.biblioteka;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.time.Year;
 import java.util.Scanner;
 
 public class Main {
@@ -160,6 +161,8 @@ public class Main {
 
         JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
 
+        BookRepository bookRepo = new BookRepository();
+        bookRepo.createNewBook("Gra o Tron", "G.R.R.Martin", Year.of(2013), 44);
 
         XMLConvertor.naXML(biblioteka);
     }
