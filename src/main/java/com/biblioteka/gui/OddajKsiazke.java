@@ -31,18 +31,7 @@ public class OddajKsiazke extends PanelBazowy {
         tableModel.addColumn("Tytuł");
         tableModel.addColumn("Autor");
         tableModel.addColumn("Rok Wydania");
-        table = new JTable(tableModel) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-
-            // brudny hack który powoduje że przy zaznaczaniu wierszy w tabeli ostatni z nich nie znika
-            @Override
-            public int getSelectedRow() {
-                int row = super.getSelectedRow();
-                if (row == -1) return -2;
-                return row;
-            }
-        };
+        table = new HighlightTable(tableModel, Color.white, Color.orange, new Color(0x79db70));
 
         table.setFont(new Font("Sans", Font.PLAIN, 14));
         table.setBorder(new LineBorder(Color.black));

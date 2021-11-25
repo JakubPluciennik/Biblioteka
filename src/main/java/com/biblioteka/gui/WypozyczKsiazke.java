@@ -8,6 +8,8 @@ import com.biblioteka.Person;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,20 +37,7 @@ public class WypozyczKsiazke extends PanelBazowy {
         tableModel.addColumn("Dostępne");
 
         //JTable dostepne = new JTable(tableModel);
-        table = new JTable(tableModel) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-
-            // brudny hack który powoduje że przy zaznaczaniu wierszy w tabeli ostatni z nich nie znika
-            @Override
-            public int getSelectedRow() {
-                int row = super.getSelectedRow();
-                if (row == -1) return -2;
-                return row;
-            }
-        };
+        table = new HighlightTable(tableModel, Color.white, Color.orange, new Color(0x79db70));
 
         table.setFont(new Font("Sans", Font.PLAIN, 14));
         table.setBorder(new LineBorder(Color.black));
