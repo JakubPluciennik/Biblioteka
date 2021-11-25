@@ -1,8 +1,11 @@
 package com.biblioteka;
 
+import com.sun.net.httpserver.HttpServer;
+
 import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.time.Year;
 import java.util.Scanner;
 
@@ -164,5 +167,11 @@ public class Main {
 
         XMLConvertor.naXML(biblioteka);
         DatabaseWriter.saveInDatabase(biblioteka);
+
+        // ----
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        server.createContext("/test", new http.MyHandler());
+        server.setExecutor(null); // creates a default executor
+        server.start();
     }
 }
