@@ -174,6 +174,24 @@ public class Main {
         server.setExecutor(null); // creates a default executor
         server.start();
 
+        HttpServer server2 = HttpServer.create(new InetSocketAddress(8001), 0);
+        server2.createContext("/test", new http.MyHandler2(biblioteka));
+        server2.setExecutor(null); // creates a default executor
+        server2.start();
 
+        HttpServer server3 = HttpServer.create(new InetSocketAddress(8002), 0);
+        server3.createContext("/test", new http.MyHandler3(biblioteka));
+        server3.setExecutor(null); // creates a default executor
+        server3.start();
+
+        HttpServer server4 = HttpServer.create(new InetSocketAddress(8003), 0);
+        server4.createContext("/test", new http.MyHandler4(biblioteka));
+        server4.setExecutor(null); // creates a default executor
+        server4.start();
+
+        HttpServer server5 = HttpServer.create(new InetSocketAddress(8004), 0);
+        server5.createContext("/test", new http.MyHandler5());
+        server5.setExecutor(null); // creates a default executor
+        server5.start();
     }
 }
