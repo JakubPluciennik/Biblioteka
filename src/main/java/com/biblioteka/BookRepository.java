@@ -12,7 +12,7 @@ public class BookRepository {
 
     public void createNewBook(String tytuł, String autor, Year rokWydania, int dostępne) {
         System.out.println(" ------------ CREATE ------------ ");
-        Book newOne = new Book(tytuł, autor, rokWydania, dostępne);
+        Book newOne = new Book(tytuł, autor, rokWydania.getValue(), dostępne);  // rok wydania zamieniony na Integer
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         System.out.println(" ------ Persisting in new transaction ------ ");
