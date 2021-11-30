@@ -193,5 +193,20 @@ public class Main {
         server5.createContext("/test", new http.MyHandler5());
         server5.setExecutor(null); // creates a default executor
         server5.start();
+
+        HttpServer server6 = HttpServer.create(new InetSocketAddress(8005), 0);
+        server6.createContext("/test", new http.MyHandler6(biblioteka));
+        server6.setExecutor(null); // wypożyczenie ksiązki
+        server6.start();
+
+        HttpServer server7 = HttpServer.create(new InetSocketAddress(8006), 0);
+        server7.createContext("/test", new http.MyHandler7(biblioteka));
+        server7.setExecutor(null); // oddanie ksiązki
+        server7.start();
+
+        HttpServer server8 = HttpServer.create(new InetSocketAddress(8007), 0);
+        server8.createContext("/test", new http.MyHandler8(biblioteka));
+        server8.setExecutor(null); // oddanie ksiązki
+        server8.start();
     }
 }
