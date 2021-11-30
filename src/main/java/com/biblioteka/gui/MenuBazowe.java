@@ -1,5 +1,6 @@
 package com.biblioteka.gui;
 
+import com.biblioteka.DatabaseWriter;
 import com.biblioteka.JSONSerializer;
 import com.biblioteka.Library;
 import com.biblioteka.XMLConvertor;
@@ -68,6 +69,11 @@ public class MenuBazowe extends PanelBazowy {
             JSONSerializer.serialize(biblioteka, "src/main/resources/JSON/Books.json", "src/main/resources/JSON/People.json");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        try {
+            DatabaseWriter.saveInDatabase(biblioteka);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         //brutalne zamykanie

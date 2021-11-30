@@ -3,10 +3,13 @@ B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\bibliotek
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\WyswietlDostepne.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\OknoRejestracji.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\WyswietlWypozyczone.java
+B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\BookRepository.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\PanelBazowy.java
+B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\HighlightTable.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\Person.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\OknoLogowania.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\Book.java
+B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\DatabaseWriter.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\MenuBazowe.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\JSONSerializer.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\MenuNiezalogowany.java
@@ -14,4 +17,5 @@ B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\bibliotek
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\MenuZalogowany.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\Main.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\OddajKsiazke.java
+B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\gui\HighlightRowRenderer.java
 B:\Users\User\Desktop\Podstawy Java\Biblioteka_Maven\src\main\java\com\biblioteka\Library.java

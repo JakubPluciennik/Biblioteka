@@ -163,6 +163,5 @@ public class Main {
         JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
 
         XMLConvertor.naXML(biblioteka);
-        DatabaseWriter.saveInDatabase(biblioteka);
     }
 }

@@ -25,21 +25,21 @@
 		"title":"I nie było już nikogo",
 		"author":"Agatha Christie",
 		"publication":1939,
-		"availability":1
+		"availability":2
 	},
 	{
 		"id":4,
 		"title":"Cień Wiatru",
 		"author":"C.R.Zafon",
 		"publication":1945,
-		"availability":3
+		"availability":2
 	},
 	{
 		"id":5,
 		"title":"Rzeźnia numer pięć",
 		"author":"Kurt Vonegut",
 		"publication":1955,
-		"availability":1
+		"availability":2
 	},
 	{
 		"id":6,

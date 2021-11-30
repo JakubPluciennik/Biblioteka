@@ -11,6 +11,7 @@ public class DatabaseWriter {
         }
     }
 
+    // bazy danych są zapisywane tylko jeśli użytkownik poprawnie wyjdzie z aplikacji (przyciskiem 'Wyjdź')
     public static void saveInDatabase(Library library) {
         saveBooks(library);
         // savePeople(library) ... - to do

@@ -1,26 +1,43 @@
 package com.biblioteka;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Year;
 
 @Entity
+@Table(name="BOOKS")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="Id")
     private long id;
 
+    @Column(name="Title")
     String tytuł;
+
+    @Column(name="Author")
     String autor;
+
+    @Transient
     Year rokWydania;
+
+    @Column(name="PublicationYear")
+    int rokWydaniaInt;
+
+    @Column(name="Available")
     int dostępne;
 
     public Book(String tytuł, String autor, Year rokWydania, int dostępne) {
         this.tytuł = tytuł;
         this.autor = autor;
         this.rokWydania = rokWydania;
+        this.dostępne = dostępne;
+    }
+
+    // na potrzeby zapisu do bazy danych
+    public Book(String tytuł, String autor, int rokWydaniaInt, int dostępne) {
+        this.tytuł = tytuł;
+        this.autor = autor;
+        this.rokWydaniaInt = rokWydaniaInt;
         this.dostępne = dostępne;
     }
 
