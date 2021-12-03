@@ -48,9 +48,9 @@ public class HighlightTable extends JTable {
   @Override
   public int getSelectedRow() {
     int row = super.getSelectedRow();
-      if (row == -1) {
-          return -2;
-      }
+    if (row == -1) {
+      return -2;
+    }
     return row;
   }
 
