@@ -1,82 +1,89 @@
 package com.biblioteka;
 
-import com.biblioteka.gui.*;
-
-import javax.swing.*;
-import java.awt.*;
+import com.biblioteka.gui.MenuNiezalogowany;
+import com.biblioteka.gui.MenuZalogowany;
+import com.biblioteka.gui.OddajKsiazke;
+import com.biblioteka.gui.OknoLogowania;
+import com.biblioteka.gui.OknoRejestracji;
+import com.biblioteka.gui.WypozyczKsiazke;
+import com.biblioteka.gui.WyswietlDostepne;
+import com.biblioteka.gui.WyswietlWypozyczone;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GUI extends JFrame {
-    private JPanel mainPanel = new JPanel(new CardLayout());
-    private CardLayout cards;
+  private JPanel mainPanel = new JPanel(new CardLayout());
+  private CardLayout cards;
 
-    JPanel oknoL;
-    JPanel oknoR;
-    JPanel menuNZ;
-    MenuZalogowany menuZ;
-    WyswietlDostepne wyswietlD;
-    WyswietlWypozyczone wyswietlW;
-    OddajKsiazke oddajK;
-    WypozyczKsiazke wypożyczK;
+  JPanel oknoL;
+  JPanel oknoR;
+  JPanel menuNZ;
+  MenuZalogowany menuZ;
+  WyswietlDostepne wyswietlD;
+  WyswietlWypozyczone wyswietlW;
+  OddajKsiazke oddajK;
+  WypozyczKsiazke wypożyczK;
 
-    private Person zalogowanyUżytkownik;
+  private Person zalogowanyUżytkownik;
 
-    public Person getZalogowanyUżytkownik() {
-        return zalogowanyUżytkownik;
-    }
+  public Person getZalogowanyUżytkownik() {
+    return zalogowanyUżytkownik;
+  }
 
-    public void setZalogowanyUzytkownik(Person person) {
-        zalogowanyUżytkownik = person;
-        onUserStateChanged();
-    }
+  public void setZalogowanyUzytkownik(Person person) {
+    zalogowanyUżytkownik = person;
+    onUserStateChanged();
+  }
 
-    public void onUserStateChanged() {
-        menuZ.update(zalogowanyUżytkownik);
-        wyswietlW.update(this);
-        oddajK.update(zalogowanyUżytkownik);
-        wyswietlD.update(this);
-        wypożyczK.update(this);
-    }
+  public void onUserStateChanged() {
+    menuZ.update(zalogowanyUżytkownik);
+    wyswietlW.update(this);
+    oddajK.update(zalogowanyUżytkownik);
+    wyswietlD.update(this);
+    wypożyczK.update(this);
+  }
 
-    public GUI(String title, Library biblioteka) {
-        super(title);
-        setSize(new Dimension(800, 600));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  public GUI(String title, Library biblioteka) {
+    super(title);
+    setSize(new Dimension(800, 600));
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //okno stałego rozmiaru
-        setResizable(false);
-        add(mainPanel);
+    //okno stałego rozmiaru
+    setResizable(false);
+    add(mainPanel);
 
-        //utworzenie kart dla mainPanel
-        cards = (CardLayout) mainPanel.getLayout();
+    //utworzenie kart dla mainPanel
+    cards = (CardLayout) mainPanel.getLayout();
 
-        //oddzielne JPanele dla każdej metody
-        oknoL = new OknoLogowania(biblioteka, mainPanel, cards, this);
-        oknoR = new OknoRejestracji(biblioteka, this, cards, mainPanel);
-        menuNZ = new MenuNiezalogowany(biblioteka, this, mainPanel, cards);
-        menuZ = new MenuZalogowany(biblioteka, this, mainPanel, cards);
-        wyswietlD = new WyswietlDostepne(biblioteka, mainPanel, cards, this);
-        wyswietlW = new WyswietlWypozyczone(biblioteka, mainPanel, cards, this);
+    //oddzielne JPanele dla każdej metody
+    oknoL = new OknoLogowania(biblioteka, mainPanel, cards, this);
+    oknoR = new OknoRejestracji(biblioteka, this, cards, mainPanel);
+    menuNZ = new MenuNiezalogowany(biblioteka, this, mainPanel, cards);
+    menuZ = new MenuZalogowany(biblioteka, this, mainPanel, cards);
+    wyswietlD = new WyswietlDostepne(biblioteka, mainPanel, cards, this);
+    wyswietlW = new WyswietlWypozyczone(biblioteka, mainPanel, cards, this);
 
-        oddajK = new OddajKsiazke(cards, mainPanel, this);
-        wypożyczK = new WypozyczKsiazke(biblioteka, mainPanel, cards, this);
+    oddajK = new OddajKsiazke(cards, mainPanel, this);
+    wypożyczK = new WypozyczKsiazke(biblioteka, mainPanel, cards, this);
 
-        //dodanie paneli metod do mainPanel, w której można je zmieniać np. switchem
-        mainPanel.add(oknoL, "OknoLogowania");
-        mainPanel.add(oknoR, "OknoRejestracji");
-        mainPanel.add(menuNZ, "MenuNiezalogowany");
-        mainPanel.add(menuZ, "MenuZalogowany");
-        mainPanel.add(wyswietlD, "WyswietlDostepne");
-        mainPanel.add(wyswietlW, "WyswietlWypozyczone");
+    //dodanie paneli metod do mainPanel, w której można je zmieniać np. switchem
+    mainPanel.add(oknoL, "OknoLogowania");
+    mainPanel.add(oknoR, "OknoRejestracji");
+    mainPanel.add(menuNZ, "MenuNiezalogowany");
+    mainPanel.add(menuZ, "MenuZalogowany");
+    mainPanel.add(wyswietlD, "WyswietlDostepne");
+    mainPanel.add(wyswietlW, "WyswietlWypozyczone");
 
-        mainPanel.add(oddajK, "OddajKsiążke");
-        mainPanel.add(wypożyczK, "WypożyczKsiążke");
-
-
-
-        //działa jak switch, po wpisaniu stringów wyżej pokazuje się to okno, aktualnie jest wyświetlenie dostęnych książek
-        cards.show(mainPanel, "MenuNiezalogowany");
+    mainPanel.add(oddajK, "OddajKsiążke");
+    mainPanel.add(wypożyczK, "WypożyczKsiążke");
 
 
-        setVisible(true);
-    }
+    //działa jak switch, po wpisaniu stringów wyżej pokazuje się to okno, aktualnie jest wyświetlenie dostęnych książek
+    cards.show(mainPanel, "MenuNiezalogowany");
+
+
+    setVisible(true);
+  }
 }
