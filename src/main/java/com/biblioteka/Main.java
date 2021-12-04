@@ -3,7 +3,11 @@ package com.biblioteka;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import org.javatuples.Pair;
 
+/**
+ * klasa Main.
+ */
 public class Main {
   static Person zalogowana = null;
 
@@ -11,6 +15,14 @@ public class Main {
     return zalogowana;
   }
 
+  /**
+   * Metoda do logowania użytkownika do biblioteki
+   *
+   * @param login   - login użytkownika
+   * @param haslo   - hasło użytkownika
+   * @param library - używana biblioteka
+   * @return - true jeśli zalogowano użytkownika, false jeśli nie zalogowano
+   */
   public static Boolean logowanie(String login, String haslo, Library library) {
     for (Person osoba : library.osoby) {
       if (login.equalsIgnoreCase(osoba.login) &&
@@ -22,15 +34,15 @@ public class Main {
     return false;
   }
 
-  static Boolean wylogowanie() {
+  static void wylogowanie() {
     zalogowana = null;
-    return true;
   }
 
   static Person tworzenieKonta() {
     System.out.println("--TWORZENIE KONTA--");
-    System.out.print("Imię: ");
     Scanner scanner = new Scanner(System.in);
+
+    System.out.print("Imię: ");
     String imie = scanner.nextLine();
 
     System.out.print("Nazwisko: ");
@@ -46,6 +58,92 @@ public class Main {
   }
 
   /**
+   * Wypisanie komunikatu początkowego i określenie wartości menu
+   *
+   * @param menu - wartość do przechodzenia switch
+   * @return zmieniona wartość menu
+   */
+  private static int komunikatPoczatkowy(int menu) {
+    if (zalogowana == null) {  //niezalogowany
+      System.out.println(
+          "----BIBLIOTEKA----\nWybierz opcję:\n1. Zaloguj się\n2. Załóż konto.\n3. Wypisz dostępne książki.\n0. Wyjdź z programu.");
+    } else { //zalogowany
+      System.out.println(
+          "----BIBLIOTEKA---- Zalogowany: |" + zalogowana.login + "| " + zalogowana.imię + " "
+              + zalogowana.nazwisko
+              +
+              "\nWybierz opcję: \n1. Wyloguj się \n2. Wypożycz książkę. \n3. Oddaj książkę. \n4. Wypisz dostępne książki. \n5. Wypisz wypożyczone przez ciebie książki. \n0. Wyjdź z programu.");
+    } //koniec komunikatu początkowego
+    Scanner scanner = new Scanner(System.in);
+    try {
+      menu = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException ex) {
+      System.out.println("Podano niepoprawną wartość, spróbuj ponownie.");
+      menu = -1;
+    }
+    return menu;
+  }
+
+  private static void próbaLogowania(Library biblioteka) {
+    System.out.println("--Logowanie--");
+    Scanner scanner;
+    System.out.print("Podaj login do konta: ");
+    scanner = new Scanner(System.in);
+    String login = scanner.nextLine();
+    System.out.print("Podaj hasło dla użytkownika " + login + ": ");
+    scanner = new Scanner(System.in);
+    String haslo = scanner.nextLine();
+    if (logowanie(login, haslo, biblioteka)) {
+      System.out.println("Udane logowanie");
+    } else {
+      System.out.println("Nieudana próba logowania\n");
+    }
+  }
+
+  private static Pair<Integer, Book> próbaWypożyczeniaKsiążki(Library biblioteka) {
+    System.out.println("--DOSTĘPNE KSIĄŻKI--\n");
+    biblioteka.wypiszDostepne();
+    Scanner scanner;
+    System.out.println(
+        "Podaj numer książki, aby ją wypożyczyć; podaj dowolny inny znak, aby pominąć");
+    scanner = new Scanner(System.in);
+    int index;
+    try {
+      index = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException ex) {
+      index = biblioteka.ksiazki.size() - 1;
+    }
+    Book ksiazka = biblioteka.ksiazki.get(index);
+    if (zalogowana.wypozyczKsiazke(index, ksiazka)) {
+      System.out.println("Wypożyczono książkę: " + ksiazka);
+    } else {
+      System.out.println("Nie udało się wypożyczyć książki");
+    }
+    return new Pair<>(index, ksiazka);
+  }
+
+  private static Pair<Integer, Book> próbaOddaniaKsiążki(Library biblioteka) {
+    System.out.println("--WYPOŻYCZONE KSIĄŻKI--\n");
+    zalogowana.wypozyczone();
+    System.out.println(
+        "Podaj numer książki, aby ją oddać; podaj dowolny inny znak, aby pominąć");
+    Scanner scanner = new Scanner(System.in);
+    int index;
+    try {
+      index = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException ex) {
+      index = -1;
+    }
+    Book ksiazka = zalogowana.wypozyczoneKsiazki.get(index);
+    if (zalogowana.oddajKsiazke(index, ksiazka)) {
+      System.out.println("Oddano książkę: " + ksiazka.toString());
+    } else {
+      System.out.println("Nie udało się oddać książki");
+    }
+    return new Pair<>(index, ksiazka);
+  }
+
+  /**
    * metoda menu w której obsługiwana jest biblioteka w trybie konsolowym
    *
    * @param biblioteka - Obiekt biblioteka który przechowuje książki i osoby
@@ -55,53 +153,22 @@ public class Main {
   @SuppressWarnings("checkstyle:OperatorWrap")
   public static void menu(Library biblioteka, int menu) throws IOException {
     do { //Komunikat początkowy
-
-      if (zalogowana == null) {  //niezalogowany
-        System.out.println(
-            "----BIBLIOTEKA----\nWybierz opcję:\n1. Zaloguj się\n2. Załóż konto.\n3. Wypisz dostępne książki.\n0. Wyjdź z programu.");
-      } else { //zalogowany
-        System.out.println(
-            "----BIBLIOTEKA---- Zalogowany: |" + zalogowana.login + "| " + zalogowana.imię + " "
-                + zalogowana.nazwisko
-                +
-                "\nWybierz opcję: \n1. Wyloguj się \n2. Wypożycz książkę. \n3. Oddaj książkę. \n4. Wypisz dostępne książki. \n5. Wypisz wypożyczone przez ciebie książki. \n0. Wyjdź z programu.");
-      } //koniec komunikatu początkowego
-
-
-      Scanner scanner = new Scanner(System.in);
-      try {
-        menu = Integer.parseInt(scanner.nextLine());
-      } catch (NumberFormatException ex) {
-        System.out.println("Podano niepoprawną wartość, spróbuj ponownie.");
-        menu = -1;
-      }
+      menu = komunikatPoczatkowy(menu);
 
       //Switch dla pozycji menu
       if (zalogowana == null) {  //niezalogowany
         switch (menu) {
-          case 1 -> { // Logowanie
-            System.out.println("--Logowanie--");
-            System.out.print("Podaj login do konta: ");
-            scanner = new Scanner(System.in);
-            String login = scanner.nextLine();
-            System.out.print("Podaj hasło dla użytkownika " + login + ": ");
-            scanner = new Scanner(System.in);
-            String haslo = scanner.nextLine();
-            if (logowanie(login, haslo, biblioteka)) {
-              System.out.println("Udane logowanie");
-            } else {
-              System.out.println("Nieudana próba logowania\n");
-            }
-          }
+          case 1 -> próbaLogowania(biblioteka); // Logowanie
+
           case 2 -> { //Tworzenie konta i logowanie
             Person konto = tworzenieKonta();
-            if (biblioteka.dodajOsobe(konto)) {
-              System.out.println("Udane utworzenie konta");
-              if (logowanie(konto.login, konto.hasło, biblioteka)) {
-                System.out.println("Udane logowanie");
-              } else {
-                System.out.println("Nieudana próba logowania\n");
-              }
+
+            if (biblioteka.dodajOsobe(konto) && logowanie(konto.login, konto.hasło, biblioteka)) {
+              System.out.println("Udane utworzenie konta i zalogowanie do biblioteki");
+
+            } else if (!logowanie(konto.login, konto.hasło, biblioteka)) {
+              System.out.println("Nieudana próba logowania\n");
+
             } else {
               System.out.println("Nie udało się utworzyć konta");
             }
@@ -110,52 +177,19 @@ public class Main {
             System.out.println("--DOSTĘPNE KSIĄŻKI--");
             biblioteka.wypiszDostepne();
           }
-          default -> {
-          }
+          default -> { }
         }
       } else { //zalogowany
-        int index;
-        Book ksiazka;
         switch (menu) {
           case 1 -> { //Wylogowanie
             System.out.println("--Wylogowanie-- \nNastępuje wylogowanie aktualnego użytkownika");
             wylogowanie();
           }
           case 2 -> { //wypożyczenie książki
-            System.out.println("--DOSTĘPNE KSIĄŻKI--\n");
-            biblioteka.wypiszDostepne();
-            System.out.println(
-                "Podaj numer książki, aby ją wypożyczyć; podaj dowolny inny znak, aby pominąć");
-            scanner = new Scanner(System.in);
-            try {
-              index = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException ex) {
-              index = biblioteka.ksiazki.size() - 1;
-            }
-            ksiazka = biblioteka.ksiazki.get(index);
-            if (zalogowana.wypozyczKsiazke(index, ksiazka)) {
-              System.out.println("Wypożyczono książkę: " + ksiazka);
-            } else {
-              System.out.println("Nie udało się wypożyczyć książki");
-            }
+            Pair<Integer, Book> wynik = próbaWypożyczeniaKsiążki(biblioteka);
           }
           case 3 -> { //oddanie książki
-            System.out.println("--WYPOŻYCZONE KSIĄŻKI--\n");
-            zalogowana.wypozyczone();
-            System.out.println(
-                "Podaj numer książki, aby ją oddać; podaj dowolny inny znak, aby pominąć");
-            scanner = new Scanner(System.in);
-            try {
-              index = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException ex) {
-              index = -1;
-            }
-            ksiazka = zalogowana.wypozyczoneKsiazki.get(index);
-            if (zalogowana.oddajKsiazke(index, ksiazka)) {
-              System.out.println("Oddano książkę: " + ksiazka.toString());
-            } else {
-              System.out.println("Nie udało się oddać książki");
-            }
+            Pair<Integer, Book> wynik = próbaOddaniaKsiążki(biblioteka);
           }
           case 4 -> { //wypisanie książek
             System.out.println("--DOSTĘPNE KSIĄŻKI--");
@@ -181,16 +215,16 @@ public class Main {
    * Metoda w której startuje aplikacja
    *
    * @param args -
-   * @throws IOException -
+   * @throws IOException - potrzebne dla biblioteka.load()
    */
   public static void main(String[] args) throws IOException {
     int menu = 0;
     Library biblioteka = new Library();
     biblioteka.load();
-    //menu(biblioteka, menu);
-    //biblioteka.save();
-
-    JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
+    menu(biblioteka, menu);
+    biblioteka.save();
+    JSONSerializer.serialize(biblioteka, "src/main/resources/JSON/Books.json", "src/main/resources/JSON/People.json");
+    //JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
 
     XMLConvertor.naXML(biblioteka);
   }
