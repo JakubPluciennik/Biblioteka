@@ -185,7 +185,7 @@ public class Main {
           case 2 -> próbaWypożyczeniaKsiążki(biblioteka); //wypożyczenie książki
 
           case 3 -> próbaOddaniaKsiążki(biblioteka); //oddanie książki
-          
+
           case 4 -> { //wypisanie książek
             System.out.println("--DOSTĘPNE KSIĄŻKI--");
             biblioteka.wypiszDostepne();
