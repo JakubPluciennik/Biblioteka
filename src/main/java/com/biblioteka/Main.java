@@ -3,7 +3,6 @@ package com.biblioteka;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFrame;
-import org.javatuples.Pair;
 
 /**
  * klasa Main.
@@ -100,7 +99,7 @@ public class Main {
     }
   }
 
-  private static Pair<Integer, Book> próbaWypożyczeniaKsiążki(Library biblioteka) {
+  private static void próbaWypożyczeniaKsiążki(Library biblioteka) {
     System.out.println("--DOSTĘPNE KSIĄŻKI--\n");
     biblioteka.wypiszDostepne();
     Scanner scanner;
@@ -119,10 +118,9 @@ public class Main {
     } else {
       System.out.println("Nie udało się wypożyczyć książki");
     }
-    return new Pair<>(index, ksiazka);
   }
 
-  private static Pair<Integer, Book> próbaOddaniaKsiążki(Library biblioteka) {
+  private static void próbaOddaniaKsiążki(Library biblioteka) {
     System.out.println("--WYPOŻYCZONE KSIĄŻKI--\n");
     zalogowana.wypozyczone();
     System.out.println(
@@ -140,7 +138,6 @@ public class Main {
     } else {
       System.out.println("Nie udało się oddać książki");
     }
-    return new Pair<>(index, ksiazka);
   }
 
   /**
@@ -185,12 +182,10 @@ public class Main {
             System.out.println("--Wylogowanie-- \nNastępuje wylogowanie aktualnego użytkownika");
             wylogowanie();
           }
-          case 2 -> { //wypożyczenie książki
-            Pair<Integer, Book> wynik = próbaWypożyczeniaKsiążki(biblioteka);
-          }
-          case 3 -> { //oddanie książki
-            Pair<Integer, Book> wynik = próbaOddaniaKsiążki(biblioteka);
-          }
+          case 2 -> próbaWypożyczeniaKsiążki(biblioteka); //wypożyczenie książki
+
+          case 3 -> próbaOddaniaKsiążki(biblioteka); //oddanie książki
+          
           case 4 -> { //wypisanie książek
             System.out.println("--DOSTĘPNE KSIĄŻKI--");
             biblioteka.wypiszDostepne();
@@ -221,10 +216,10 @@ public class Main {
     int menu = 0;
     Library biblioteka = new Library();
     biblioteka.load();
-    menu(biblioteka, menu);
-    biblioteka.save();
-    JSONSerializer.serialize(biblioteka, "src/main/resources/JSON/Books.json", "src/main/resources/JSON/People.json");
-    //JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
+    //menu(biblioteka, menu);
+    //biblioteka.save();
+    //JSONSerializer.serialize(biblioteka, "src/main/resources/JSON/Books.json", "src/main/resources/JSON/People.json");
+    JFrame gui = new GUI("Aplikacja Biblioteki", biblioteka);
 
     XMLConvertor.naXML(biblioteka);
   }
